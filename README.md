@@ -1,2 +1,2 @@
 # panicbutton
-Use Amazon IoT Button, AWS Lambda, and Twilio to send messages on button click.
+Use AWS Lambda and Twilio to send messages when Amazon IoT Button is clicked.
