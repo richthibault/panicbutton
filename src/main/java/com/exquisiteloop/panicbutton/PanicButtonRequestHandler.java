@@ -34,6 +34,8 @@ public class PanicButtonRequestHandler implements RequestHandler<IoTButtonEvent,
     	if(null==fromPhone || null==toPhone || null==msg)
     		throw new RuntimeException(String.format("No phone numbers found, set environment variables for %s, %s, and %s.", PANIC_BUTTON_FROM_VAR, PANIC_BUTTON_TO_VAR, PANIC_BUTTON_MSG_VAR));
 
+        Twilio.init(twilioSid, authToken);
+
     	PhoneNumber from = new PhoneNumber(fromPhone);
     	List<String> toPhones = Arrays.asList(toPhone.split("\\s*,\\s*"));
     	
@@ -42,7 +44,6 @@ public class PanicButtonRequestHandler implements RequestHandler<IoTButtonEvent,
 	    	
 	    	System.out.println(String.format("Sending message '%s' from %s to %s", msg, fromPhone, tp));
 	    	
-	        Twilio.init(twilioSid, authToken);
 	        Message message = Message.creator(to, from, msg).create();
 	        
 	        Integer errorCode = message.getErrorCode();
